@@ -30,7 +30,7 @@
         let result:selectArray[]|selectArray;
         objArray.forEach((el,index,arr)=> {
             arr[index].selected = false;
-            if((e.detail && e.detail.some && e.detail.some(x=>el.value === x.value)) || (e.detail && !e.detail.some && e.detail.value === el.value))
+            if((e.detail && e.detail.some && e.detail.some((x: { value: any; })=>el.value === x.value)) || (e.detail && !e.detail.some && e.detail.value === el.value))
             {                
                 selected.push(arr[index])              
                 arr[index].selected = true;
