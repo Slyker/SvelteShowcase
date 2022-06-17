@@ -20,6 +20,7 @@ export let keybClose:boolean = true;
 export let mouseClose:boolean = true;
 export let closeBtn:boolean = true;
 export let okClose:boolean = true;
+export let cancelClose:boolean = true;
 export let title:string="";
 // Concerns buttons
 export let type:string = "basic" // basic|yesno|remove
@@ -114,7 +115,7 @@ modals[id]={open,close}
 			<slot></slot>
 			{#if type.toLowerCase() !== "basic" }
 			<div style="float: right;">
-				<button style={SerializeStyle({...cancelStyle})}  on:click={()=>{onCancel();getModal(id).close()}}>
+				<button style={SerializeStyle({...cancelStyle})}  on:click={()=>{onCancel();if(cancelClose)getModal(id).close()}}>
 					{cancelText}
 				</button>
 				<button style={SerializeStyle({...okStyle})} on:click={()=>{onOk();if(okClose)getModal(id).close()}}>
