@@ -34,8 +34,8 @@
         colorSet = temp;
     }
     $:if(oldDelay !== delay){
-                oldDelay = delay                
-                createInterval()                
+        oldDelay = delay                
+        createInterval()                
     }
     const createInterval=()=>{
         clearInterval(interval)

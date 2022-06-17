@@ -2,6 +2,7 @@
     import RainbowText from "$lib/RainbowText/RainbowText.svelte";
     import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
     import Select from 'svelte-select';
+    import Modal from '$lib/CRUD/components/Modal.svelte'
 
     let CurrentStyle:object;
     $:CurrentStyle ={backgroundColor:"black",fontSize:"40px"}
@@ -92,6 +93,18 @@
 
     //
 </script>
+<Modal>
+	<h1>Hello {name}!</h1>
+	<!-- opening a model with an `id` and specifying a callback	 -->
+	<button on:click={()=>getModal('second').open(setSelection)}>
+		Open Nested Popup
+	</button>
+	{#if selection}
+	<p>
+		Your selection was: {selection}
+	</p>
+	{/if}
+</Modal>
 <center>
 
 

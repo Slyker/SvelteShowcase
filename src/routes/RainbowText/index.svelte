@@ -2,6 +2,7 @@
     import RainbowText from "$lib/RainbowText/RainbowText.svelte";
     import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
     import Select from 'svelte-select';
+	import Modal,{getModal} from '$lib/CRUD/components/Modal.svelte'
 
     let CurrentStyle:object;
     $:CurrentStyle ={backgroundColor:"black",fontSize:"40px"}
@@ -23,7 +24,6 @@
         selected?:boolean
     }
     const incrementSelectId = (num:number,arr:selectArray[]):number => {
-        console.log(num)
         if(arr.find(x=>x.value === num)){
             return incrementSelectId(num+1,arr)
         }
@@ -48,11 +48,15 @@
         wordsSelect=wordsSelect
         newWord=""
     }
+    const confirmRemoveWord= () => {
+        getModal("delWord").open()
+    }
     const delWord = () => {
         wordsSelect = wordsSelect.filter(function( obj ) {
             return obj.value !== selectedWord?.value;
         });       
         selectedWord=null
+        getModal("delWord").close()
     }
 
     let colors:string[] =["blue","gray", "red"];
@@ -66,12 +70,16 @@
         colorsSelect=colorsSelect
         newColor=""
     }
+    const confirmRemoveColor= () => {
+        getModal("delWord").open()
+    }
     const delColor = () => {
         colorsSelect = colorsSelect.filter(function( obj ) {
             return obj.value !== selectedColor?.value;
         });
        
         selectedColor=null
+        getModal("delWord").close()
     }
 
     const selectChange = (objArray:selectArray[], e:any) => {
@@ -92,6 +100,30 @@
 
     //
 </script>
+<Modal id="delWord" title="Would you delete ?">
+	<h1>Are you sure you want to delete entry : <strong>{selectedWord?.label}</strong></h1>
+    <center>
+        <h2 style="color:red">This action can't be undo</h2>
+        <button on:click={()=>getModal('delWord').close()}>
+            Cancel
+        </button>
+        <button on:click={delWord}>
+            Delete
+        </button>
+    </center>
+</Modal>
+<Modal id="delColor" title="Would you delete ?">
+	<h1>Are you sure you want to delete entry :<strong>{selectedColor?.label}</strong></h1>
+    <center>
+        <h2 style="color:red">This action can't be undo</h2>
+        <button on:click={()=>getModal('delColor').close()}>
+            Cancel
+        </button>
+        <button on:click={delColor}>
+            Delete
+        </button>
+    </center>
+</Modal>
 <center>
 
 
@@ -131,9 +163,10 @@
     {#if selectedWord }
     <input type="text" name="editWordInput" id="18daz81d8" bind:value={ selectedWord.label} on:input={() => wordsSelect = wordsSelect} on:change={()=>selectedWord=null} >
     <button on:click={()=>{
-        delWord()
+        confirmRemoveWord()
     }}>Delete</button>
     {/if}
+
 <h1>Colors</h1>
 <input type="text" name="addWordInput" id="18dazdd81d8" bind:value={ newColor} on:change={()=>addColor()} >
 <button on:click={()=>{
@@ -148,7 +181,7 @@
     {#if selectedColor }
     <input type="text" name="editWordInput" id="18dazdaz81d8" bind:value={ selectedColor.label} on:input={() => colorsSelect = colorsSelect} on:change={()=>selectedColor=null} >
     <button on:click={()=>{
-        delColor()
+        confirmRemoveColor()
     }}>Delete</button>
     {/if}
 
