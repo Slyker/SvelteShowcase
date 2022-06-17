@@ -24,7 +24,8 @@
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
-		width: 100%;
+		    width: 100%;
+    max-width: 100%;
 		max-width: 1024px;
 		margin: 0 auto;
 		box-sizing: border-box;
@@ -35,6 +36,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+            width: 100%;
+    max-width: 100%;
 		padding: 40px;
 	}
 
