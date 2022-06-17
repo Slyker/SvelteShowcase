@@ -45,7 +45,7 @@
         }, delay*1000);
     }
     onMount(() => {
-        //cCountAction()
+        cCountAction()
         createInterval()
 		return () => clearInterval(interval);
 	});
