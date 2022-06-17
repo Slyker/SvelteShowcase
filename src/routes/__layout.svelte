@@ -7,6 +7,7 @@
 	{url:"/",displayName:"Home"},
 	{url:"/todos",displayName:"Todos"},
 	{url:"/RainbowText",displayName:"RainbowText"},
+	{url:"/Modals",displayName:"Modals"},
 	{url:"/about",displayName:"About"},
 	]} />
 

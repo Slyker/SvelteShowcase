@@ -10,16 +10,53 @@
 
 <script lang="ts">
 import {onDestroy, onMount} from 'svelte'
-	
+import {ParseStyles,SerializeStyle} from '$lib/StylesParser'
 let topDiv:any
 let visible=false;
 let prevOnTop:any
 let closeCallback:any
+
 export let keybClose:boolean = true;
 export let mouseClose:boolean = true;
 export let closeBtn:boolean = true;
+export let okClose:boolean = true;
 export let title:string="";
+// Concerns buttons
+export let type:string = "basic" // basic|yesno|remove
+export let onOk:Function = () => null;
+export let onCancel:Function = () =>null;
+export let okText:string = "Yes";
+export let cancelText:string = "No";
+export let okStyle:object={};
+export let cancelStyle:object={};
 
+$:{
+	switch (type) {
+		case "basic":
+			okText = ""
+			cancelText=""
+			break;
+		case "yesno":
+			okText = "Yes"
+			cancelText="No"
+		break;
+		case "delete":
+			okText = "Delete"
+			cancelText="Cancel"		
+		break;
+		case "add":
+			okText = "Add"
+			cancelText="Cancel"		
+			break;
+		case "update":
+			okText = "Update"
+			cancelText="Cancel"		
+		break;
+	
+		default:
+			break;
+	}
+}
 export let id=''
 
 function keyPress(ev:any){
@@ -75,6 +112,16 @@ modals[id]={open,close}
                 </svg>
             {/if}
 			<slot></slot>
+			{#if type.toLowerCase() !== "basic" }
+			<div style="float: right;">
+				<button style={SerializeStyle({...cancelStyle})}  on:click={()=>{onCancel();getModal(id).close()}}>
+					{cancelText}
+				</button>
+				<button style={SerializeStyle({...okStyle})} on:click={()=>{onOk();if(okClose)getModal(id).close()}}>
+					{okText}
+				</button>
+			</div>
+			{/if}
 		</div>
 	</div>
 </div>
