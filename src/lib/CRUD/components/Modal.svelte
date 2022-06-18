@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import {onDestroy, onMount} from 'svelte'
-import {ParseStyles,SerializeStyle} from '$lib/StylesParser'
+import {ParseStyles,SerializeStyle} from '$lib/Styles/StylesParser'
 import Separator from '$lib/UI/Separator.svelte'
 let topDiv:any
 let visible=false;
@@ -117,7 +117,7 @@ modals[id]={open,close}
             {/if}			
 			<slot name="content"></slot>
 			{#if type.toLowerCase() !== "basic" }
-			<div style="float: right;">
+			<div style="display:flex; flex-direction: row;float:right;">
 				<button style={SerializeStyle({...cancelStyle})}  on:click={()=>{onCancel();if(cancelClose)getModal(id).close()}}>
 					{cancelText}
 				</button>
@@ -131,6 +131,25 @@ modals[id]={open,close}
 </div>
 
 <style>
+	button {
+        width: 4em;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        background-color: transparent;
+        touch-action: manipulation;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        margin-right: 10px;
+        margin-top: 5px;
+        background-color:rgba(117, 117, 117, 0.322);
+    }
+
+    button:hover {
+        background-color: var(--secondary-color);
+    }
 	.topModal {
 		visibility: hidden;
 		z-index: 9999;
@@ -179,6 +198,12 @@ modals[id]={open,close}
 	.modal-content {
 		max-width: calc(100vw - 20px);
 		max-height: calc(100vh - 20px);
+		min-width: calc(50vw );
+		
+
 		overflow: auto;
+		align-items: center;
+		justify-content: center;
+
 	}
 </style>
