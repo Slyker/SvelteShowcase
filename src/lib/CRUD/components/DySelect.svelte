@@ -1,0 +1,134 @@
+<script lang=ts context=module>
+    export type selectArray = {
+        value:number,
+        label:string,
+        group?:string,
+        selectable?:boolean,
+        selected?:boolean
+    }
+    const incrementSelectId = (num:number,arr:selectArray[]):number => {
+        if(arr.find(x=>x.value === num)){
+            return incrementSelectId(num+1,arr)
+        }
+        return num
+    }
+
+    export const parseSelectArray = (labels:string[], current?:selectArray[])=> {
+        let result:selectArray[] = []
+        let id = current || result
+        labels.forEach(label => {
+            result.push({value:incrementSelectId(id.length+1,result),label})
+        });
+        return result
+    }
+</script>
+<script lang=ts>
+    import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
+    import {getID} from "$lib/CRUD/IdGen.svelte"
+
+    import Select from 'svelte-select';
+	import Modal,{getModal} from '$lib/CRUD/components/Modal.svelte'
+
+
+
+    
+    const selectChange = (objArray:selectArray[], e:any) => {
+        let selected:selectArray[] = []
+        let result:selectArray[]|selectArray;
+        objArray.forEach((el,index,arr)=> {
+            arr[index].selected = false;
+            if((e.detail && e.detail.some && e.detail.some((x: { value: any; })=>el.value === x.value)) || (e.detail && !e.detail.some && e.detail.value === el.value))
+            {                
+                selected.push(arr[index])              
+                arr[index].selected = true;
+            }
+        })
+        result= selected[0]
+        return result
+    }
+
+    export let items:string[] =[];
+    export let selectedItem:selectArray|null = null;
+    export let itemsList:selectArray[] = parseSelectArray(items)
+    let newWord:string="";
+    let updateWord:string="";
+
+    let updateModal=getID(5);
+    let AddModal=getID(5);
+    let DelModal=getID(5);
+    $:items = itemsList.map(x=>x.label)
+
+    const addWord = () => {
+        if(newWord && newWord.length>0)
+        itemsList.push(...parseSelectArray([newWord],itemsList))
+        itemsList=itemsList
+        newWord=""
+    }
+    const upWord = () => {
+        if(selectedItem)
+            selectedItem.label=updateWord
+            itemsList = itemsList 
+        getModal(updateModal).close()
+    }
+
+    const delWord = () => {
+        itemsList = itemsList.filter(function( obj ) {
+            return obj.value !== selectedItem?.value;
+        });       
+        selectedItem=null
+        getModal(DelModal).close()
+    }
+
+
+    const confirmRemoveWord= () => {
+        getModal(DelModal).open()
+    }
+</script>
+
+<Modal id={updateModal} title="Update entry" type="update" onOk={upWord}>
+	<h1> Selected entry : {selectedItem?.label}</h1>
+    <center>
+        {#if selectedItem }
+            <input type="text" name="editWordInput" id="18daz81d8" bind:value={updateWord} on:change={upWord}  >
+        {/if}
+    </center>
+</Modal>
+
+<Modal id={AddModal} title="Entry creation" type="add" onOk={()=>{
+    addWord()
+    getModal(AddModal).close()
+}}>
+	<h1> Word :</h1>
+    <center>
+        <input type="text" name="addWordInput" id="18dazdd81d8" bind:value={ newWord} on:change={()=>{getModal(AddModal).close();addWord()}} >
+    </center>
+</Modal>
+
+<Modal id={DelModal} title="Would you delete ?"  type="delete" onOk={delWord}>
+	<h1>Are you sure you want to delete entry : <strong>{selectedItem?.label}</strong></h1>
+    <center>
+        <h2 style="color:red">This action can't be undo</h2>
+    </center>
+</Modal>
+
+
+<Select showChevron  on:change={(e)=>{ 
+    selectedItem = null
+    selectedItem = selectChange(itemsList,e)
+    console.log(itemsList )
+}}
+    items={itemsList} />
+    <button on:click={()=>{
+        getModal(AddModal).open()
+    }}>Add
+    </button>
+    {#if selectedItem }
+    <!--<input type="text" name="editWordInput" id="18daz81d8" bind:value={ selectedWord.label} on:input={() => wordsSelect = wordsSelect} on:change={()=>selectedWord=null} > !-->
+    <button on:click={()=>{
+        updateWord = selectedItem?.label || ""
+        getModal(updateModal).open()
+    }}>Edit</button>
+    <button on:click={()=>{
+        confirmRemoveWord()
+    }}>Delete</button>
+    {/if}

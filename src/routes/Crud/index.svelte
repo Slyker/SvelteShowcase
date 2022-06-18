@@ -1,5 +1,5 @@
 <script lang=ts>
-  import DynInput from './DynInput.svelte';
+  import DynInput from '../../lib/CRUD/components/DynInput.svelte';
 
     export let number:number=1;
     export let text:string="1";
@@ -16,9 +16,9 @@
     export let password:string="";
     export let radio:string="";
     export let range:string="";
-    export let reset:string="";
+    export let reset:string="Reset";
     export let search:string="";
-    export let submit:string="";
+    export let submit:string="Submit";
     export let tel:string="";
     export let time:string="";
     export let url:string="";
@@ -35,6 +35,8 @@
 <DynInput type="checkbox" DEBUG bind:value={checkbox} />
 <DynInput type="email" DEBUG bind:value={email} />
 <DynInput type="search" DEBUG bind:value={search} />
+<DynInput type="tel" DEBUG bind:value={tel} />
+<DynInput type="url" DEBUG bind:value={url} />
 <h1>Date</h1>
 <DynInput type="date" DEBUG bind:value={date} />
 <DynInput type="datetime" DEBUG bind:value={datetime} />
@@ -49,6 +51,5 @@
 <DynInput type="image" DEBUG bind:value={image} />
 <DynInput type="reset" DEBUG bind:value={reset} />
 <DynInput type="submit" DEBUG bind:value={submit} />
-<DynInput type="tel" DEBUG bind:value={tel} />
-<DynInput type="url" DEBUG bind:value={url} />
+
 <DynInput type="hidden" DEBUG bind:value={hidden} />

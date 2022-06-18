@@ -95,20 +95,20 @@ modals[id]={open,close}
 	
 </script>
 
-<div id="topModal" class:visible bind:this={topDiv} on:click={()=>{if(mouseClose){close()}}}>
-	<div id='modal' on:click|stopPropagation={()=>{}}>
+<div id={"topModal-"+id} class={"topModal"} class:visible bind:this={topDiv} on:click={()=>{if(mouseClose){close()}}}>
+	<div id={'modal-'+id} class={"modal"} on:click|stopPropagation={()=>{}}>
         {#if closeBtn }
-            <svg id="close" on:click={()=>close()} viewBox="0 0 12 12">
+            <svg class:close id="{'modal-close-'+id}" on:click={()=>close()} viewBox="0 0 12 12">
                 <circle cx=6 cy=6 r=6 />
                 <line x1=3 y1=3 x2=9 y2=9 />
                 <line x1=9 y1=3 x2=3 y2=9 />
             </svg>
         {/if}
 
-		<div id='modal-content'>
+		<div class="modal-content" id={'modal-content-'+id}>
             {#if title && title.length > 0 }
                 <h1 style="margin:0;">{title}</h1>
-                <svg id="header" height="1" width="100%" >
+                <svg id={'modal-header-'+id} height="1" width="100%" >
                     <line x1="0" y1="0"  x2="100%" y2="0"  style="stroke:black;stroke-width:2.5" />
                 </svg>
             {/if}
@@ -128,7 +128,7 @@ modals[id]={open,close}
 </div>
 
 <style>
-	#topModal {
+	.topModal {
 		visibility: hidden;
 		z-index: 9999;
 		position: fixed;
@@ -141,7 +141,7 @@ modals[id]={open,close}
 		align-items: center;
 		justify-content: center;
 	}
-	#modal {
+	.modal {
 		position: relative;
 		border-radius: 6px;
 		background: white;
@@ -154,7 +154,7 @@ modals[id]={open,close}
 		visibility: visible !important;
 	}
 
-	#close {
+	.close {
 		position: absolute;
 		top:-12px;
 		right:-12px;
@@ -165,15 +165,15 @@ modals[id]={open,close}
 		transition: transform 0.3s;
 	}	
 
-	#close:hover {
+	.close:hover {
 		transform: scale(2);
 	}
 
-	#close line {
+	.close line {
 		stroke:#FFF;
 		stroke-width:2;
 	}
-	#modal-content {
+	.modal-content {
 		max-width: calc(100vw - 20px);
 		max-height: calc(100vh - 20px);
 		overflow: auto;
