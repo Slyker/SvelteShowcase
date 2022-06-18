@@ -23,7 +23,7 @@
     }
 </script>
 <script lang=ts>
-    import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
+    import {SerializeStyle,ParseStyles} from '$lib/Styles/StylesParser';
     import {getID} from "$lib/CRUD/IdGen.svelte"
     import DynInput from '$lib/CRUD/components/DynInput.svelte';
 
@@ -111,7 +111,7 @@
 </Modal>
 
 <Modal id={DelModal} title="Would you delete ?"  type="delete" onOk={delWord}>
-    <svelte:fragment>
+    <svelte:fragment slot="content">
         <h1>Are you sure you want to delete entry : <strong>{selectedItem?.label}</strong></h1>
         <center>
             <h2 style="color:red">This action can't be undo</h2>
@@ -126,16 +126,33 @@
     console.log(itemsList )
 }}
     items={itemsList} />
-    <button on:click={()=>{
-        getModal(AddModal).open()
-    }}>Add
-    </button>
-    {#if selectedItem }
-    <button on:click={()=>{
-        updateWord = selectedItem?.label || ""
-        getModal(updateModal).open()
-    }}>Edit</button>
-    <button on:click={()=>{
-        confirmRemoveWord()
-    }}>Delete</button>
-    {/if}
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;">
+        <button on:click={()=>{getModal(AddModal).open()}}>Add</button>
+        {#if selectedItem }
+            <button on:click={()=>{updateWord = selectedItem?.label || "";getModal(updateModal).open()}}>Edit</button>
+            <button on:click={()=>{ confirmRemoveWord() }}>Delete</button>
+        {/if}
+    </div>
+
+
+<style>
+    button {
+        width: 4em;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        background-color: transparent;
+        touch-action: manipulation;
+        color: var(--text-color);
+        font-size: 2rem;
+        margin-right: 10px;
+        margin-top: 5px;
+        background-color:rgba(117, 117, 117, 0.322);
+    }
+
+    button:hover {
+        background-color: var(--secondary-color);
+    }
+</style>
