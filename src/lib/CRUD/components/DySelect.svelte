@@ -88,29 +88,35 @@
 </script>
 
 <Modal id={updateModal} title="Update entry" type="update" onOk={upWord}>
-	<h1> Selected entry : {selectedItem?.label}</h1>
-    <center>
-        {#if selectedItem }
-            <DynInput type={type} bind:value={updateWord} on:change={upWord} />
+    <svelte:fragment slot="content">
+        <h1> Selected entry : {selectedItem?.label}</h1>
+        <center>
+            {#if selectedItem }
+                <DynInput type={type} bind:value={updateWord} on:change={upWord} />
+    
+            {/if}
+        </center>
+    </svelte:fragment>
 
-        {/if}
-    </center>
 </Modal>
 
 <Modal id={AddModal} title="Entry creation" type="add" onOk={()=>{
     addWord()
-    getModal(AddModal).close()
-}}>
-    <center>
-        <DynInput type={type} bind:value={newWord} on:change={()=>{getModal(AddModal).close();addWord()}}/>
-    </center>
+    getModal(AddModal).close()}}>
+    <svelte:fragment slot="content">
+        <center>
+            <DynInput type={type} bind:value={newWord} on:change={()=>{getModal(AddModal).close();addWord()}}/>
+        </center>
+    </svelte:fragment>
 </Modal>
 
 <Modal id={DelModal} title="Would you delete ?"  type="delete" onOk={delWord}>
-	<h1>Are you sure you want to delete entry : <strong>{selectedItem?.label}</strong></h1>
-    <center>
-        <h2 style="color:red">This action can't be undo</h2>
-    </center>
+    <svelte:fragment>
+        <h1>Are you sure you want to delete entry : <strong>{selectedItem?.label}</strong></h1>
+        <center>
+            <h2 style="color:red">This action can't be undo</h2>
+        </center>
+    </svelte:fragment>
 </Modal>
 
 

@@ -11,6 +11,7 @@
 <script lang="ts">
 import {onDestroy, onMount} from 'svelte'
 import {ParseStyles,SerializeStyle} from '$lib/StylesParser'
+import Separator from '$lib/UI/Separator.svelte'
 let topDiv:any
 let visible=false;
 let prevOnTop:any
@@ -106,13 +107,15 @@ modals[id]={open,close}
         {/if}
 
 		<div class="modal-content" id={'modal-content-'+id}>
-            {#if title && title.length > 0 }
+			{#if $$slots.header}
+				<slot name="header"></slot>
+				<Separator id={"modal-header-serparator-"+id} h={1} w="100%"/>
+			{:else if title && title.length > 0} 
                 <h1 style="margin:0;">{title}</h1>
-                <svg id={'modal-header-'+id} height="1" width="100%" >
-                    <line x1="0" y1="0"  x2="100%" y2="0"  style="stroke:black;stroke-width:2.5" />
-                </svg>
-            {/if}
-			<slot></slot>
+				<Separator id={"modal-header-serparator-"+id} h={1} w="100%"/>
+
+            {/if}			
+			<slot name="content"></slot>
 			{#if type.toLowerCase() !== "basic" }
 			<div style="float: right;">
 				<button style={SerializeStyle({...cancelStyle})}  on:click={()=>{onCancel();if(cancelClose)getModal(id).close()}}>
