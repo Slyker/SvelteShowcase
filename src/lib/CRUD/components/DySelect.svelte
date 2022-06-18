@@ -25,6 +25,7 @@
 <script lang=ts>
     import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
     import {getID} from "$lib/CRUD/IdGen.svelte"
+    import DynInput from '$lib/CRUD/components/DynInput.svelte';
 
     import Select from 'svelte-select';
 	import Modal,{getModal} from '$lib/CRUD/components/Modal.svelte'
@@ -50,6 +51,7 @@
     export let items:string[] =[];
     export let selectedItem:selectArray|null = null;
     export let itemsList:selectArray[] = parseSelectArray(items)
+    export let type="text";
     let newWord:string="";
     let updateWord:string="";
 
@@ -89,7 +91,8 @@
 	<h1> Selected entry : {selectedItem?.label}</h1>
     <center>
         {#if selectedItem }
-            <input type="text" name="editWordInput" id="18daz81d8" bind:value={updateWord} on:change={upWord}  >
+            <DynInput type={type} bind:value={updateWord} on:change={upWord} />
+
         {/if}
     </center>
 </Modal>
@@ -98,9 +101,8 @@
     addWord()
     getModal(AddModal).close()
 }}>
-	<h1> Word :</h1>
     <center>
-        <input type="text" name="addWordInput" id="18dazdd81d8" bind:value={ newWord} on:change={()=>{getModal(AddModal).close();addWord()}} >
+        <DynInput type={type} bind:value={newWord} on:change={()=>{getModal(AddModal).close();addWord()}}/>
     </center>
 </Modal>
 
@@ -123,7 +125,6 @@
     }}>Add
     </button>
     {#if selectedItem }
-    <!--<input type="text" name="editWordInput" id="18daz81d8" bind:value={ selectedWord.label} on:input={() => wordsSelect = wordsSelect} on:change={()=>selectedWord=null} > !-->
     <button on:click={()=>{
         updateWord = selectedItem?.label || ""
         getModal(updateModal).open()

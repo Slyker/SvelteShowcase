@@ -5,6 +5,7 @@
     export let input:any=value;
     export let DEBUG:boolean=false;
     export let radioOptions:string[]=[];
+    export let onChange:Function=()=>null;
     let id =  getID(5)
     let name = id + "-" + type   
     type rangeOption = {
@@ -15,10 +16,11 @@
     export let rangeOptions:rangeOption= {min:0,max:100,step:1};
     let changed:boolean = false;
     $:if(DEBUG){
-        console.log(`DynInput Changed old:${value} new:${input}`)
+        //console.log(`DynInput Changed old:${value} new:${input}`)
     }
     
     $:if(changed){
+        onChange();
         value=input;
         changed=false;
     }
@@ -26,8 +28,8 @@
 </script>
 
 <label for={value}>
-    {(DEBUG)? `DEBUG - Type : ${type} old:${value} new:${input}`:""}
-    Value : {value} |
+    {(DEBUG)? `DEBUG - Type : ${type} old:${value} new:${input} |`:""}
+    
     {#if type ==="text" }
         <input type="text" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
     {:else if type==="number"}

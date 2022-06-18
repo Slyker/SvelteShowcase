@@ -56,7 +56,7 @@
 <h1>Words :</h1>
 <DySelect  bind:items={words} bind:itemsList={wordsSelect} />
 <h1>Colors :</h1>
-<DySelect  bind:items={colors} bind:itemsList={colorsSelect} />
+<DySelect  bind:items={colors} bind:itemsList={colorsSelect} type="color" />
 
 
 <!--Style and props edit-->
