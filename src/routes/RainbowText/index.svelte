@@ -1,6 +1,6 @@
 <script lang="ts">
     import RainbowText from "$lib/RainbowText/RainbowText.svelte";
-    import {SerializeStyle,ParseStyles} from '$lib/StylesParser';
+    import {SerializeStyle,ParseStyles} from '$lib/Styles/StylesParser';
     import DySelect,{parseSelectArray} from '$lib/CRUD/components/DySelect.svelte'
     import type {selectArray} from '$lib/CRUD/components/DySelect.svelte'
 

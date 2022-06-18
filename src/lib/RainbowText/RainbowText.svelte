@@ -1,6 +1,6 @@
 <script lang="ts">
     import {onMount} from 'svelte';
-    import {SerializeStyle} from '$lib/StylesParser'
+    import {SerializeStyle} from '$lib/Styles/StylesParser'
        
     export let colors:string[] = [];
     export let words:string[]= [];
@@ -56,3 +56,4 @@
         <span style={SerializeStyle({...style, color:colorSet[i]})}>{word}</span>
     {/each}
 </span>
+
