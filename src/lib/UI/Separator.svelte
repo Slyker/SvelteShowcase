@@ -1,5 +1,5 @@
 <script lang="ts">
-import {ParseStyles,SerializeStyle} from '$lib/StylesParser'
+import {ParseStyles,SerializeStyle} from '$lib/Styles/StylesParser'
 
 export let id:any;
 export let h:any;

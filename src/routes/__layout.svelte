@@ -4,21 +4,24 @@
 </script>
 
 <Header routes={[
-	{url:"/",displayName:"Home"},
-	{url:"/todos",displayName:"Todos"},
-	{url:"/RainbowText",displayName:"RainbowText"},
-	{url:"/Modals",displayName:"Modals"},
-	{url:"/Crud",displayName:"Crud test"},
-	{url:"/about",displayName:"About"},
+	{href:"/",label:"Home"},
+	{href:"/todos",label:"Todos",disabled:true},
+	{href:"/RainbowText",label:"RainbowText"},
+	{href:"/Modals",label:"Modals"},
+	{href:"/Crud",label:"Crud test"},
+	{href:"/Styles",label:"Global styles"},
+	{href:"/about",label:"About"},
 	]} />
 
-<main>
+<main class="">
 	<slot />
-</main>
 
-<footer>
+</main>
+<footer class="footer">
 	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
 </footer>
+
+
 
 <style>
 	main {
@@ -26,11 +29,12 @@
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
-		    width: 100%;
-    max-width: 100%;
+		width: 100%;
+    	max-width: 100%;
 		max-width: 1024px;
 		margin: 0 auto;
 		box-sizing: border-box;
+		min-height: calc(100vh - 195px);
 	}
 
 	footer {
@@ -41,6 +45,7 @@
             width: 100%;
     max-width: 100%;
 		padding: 40px;
+   		bottom:0;
 	}
 
 	footer a {
