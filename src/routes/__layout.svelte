@@ -10,6 +10,7 @@
 		{href:"/RainbowText",label:"RainbowText"},
 		{href:"/Modals",label:"Modals"},
 		{href:"/Crud",label:"Crud test"},
+		{href:"/lorem",label:"Lorems"},
 		{href:"/Styles",label:"Global styles"},
 		{href:"/about",label:"About"},
 		]} />
@@ -46,7 +47,7 @@
 		flex-shrink: 0;
 		flex-basis: auto;
 		text-align: center;
-		background-color: #a8b5c0;
+		background-color:var(--secondary-color);
 	}
 
 	main {
