@@ -1,29 +1,29 @@
 <script lang=ts>
-    import DynInput from '../../lib/CRUD/components/DynInput.svelte';
-  
-    export let number:number=1;
-    export let text:string="1";
-    export let color:string="#ffffff";
-    export let checkbox:boolean=true;
-    export let date:string="";
-    export let datetime:string="";
-    export let datetimeLocal:string="";
-    export let email:string="";
-    export let hidden:string="";
-    export let file:string="";
-    export let image:string="https://f.hellowork.com/blogdumoderateur/2013/09/google-logo.png";
-    export let month:string="";
-    export let password:string="";
-    export let radio:string="";
-    export let range:string="";
-    export let reset:string="Reset";
-    export let search:string="";
-    export let submit:string="Submit";
-    export let tel:string="";
-    export let time:string="";
-    export let url:string="";
-    export let week:string="";
-  </script>
+  import DynInput from "$lib/CRUD/components/DynInput.svelte";
+
+  export let number:number=1;
+  export let text:string="1";
+  export let color:string="#ffffff";
+  export let checkbox:boolean=true;
+  export let date:string="";
+  export let datetime:string="";
+  export let datetimeLocal:string="";
+  export let email:string="";
+  export let hidden:string="";
+  export let file:string="";
+  export let image:string="https://f.hellowork.com/blogdumoderateur/2013/09/google-logo.png";
+  export let month:string="";
+  export let password:string="";
+  export let radio:string="";
+  export let range:string="";
+  export let reset:string="Reset";
+  export let search:string="";
+  export let submit:string="Submit";
+  export let tel:string="";
+  export let time:string="";
+  export let url:string="";
+  export let week:string="";
+</script>
 
 <h1>Basic</h1>
 <DynInput type="number" DEBUG bind:value={number} />

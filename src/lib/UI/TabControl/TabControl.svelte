@@ -42,7 +42,7 @@
 <svelte:component this={selectedPage.component} />
 <style>
 	/* Style tab links */
-    .tabConctrol{
+    .tabControl{
         display: flex;
     }
 	.tablink {
