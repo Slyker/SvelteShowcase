@@ -1,24 +1,25 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
+	import RainbowText from '$lib/RainbowText/RainbowText.svelte';
 </script>
-
-<Header routes={[
-	{href:"/",label:"Home"},
-	{href:"/todos",label:"Todos",disabled:true},
-	{href:"/RainbowText",label:"RainbowText"},
-	{href:"/Modals",label:"Modals"},
-	{href:"/Crud",label:"Crud test"},
-	{href:"/Styles",label:"Global styles"},
-	{href:"/about",label:"About"},
-	]} />
-
-<main class="">
+<header>
+	<Header routes={[
+		{href:"/",label:"Home"},
+		{href:"/todos",label:"Todos",disabled:true},
+		{href:"/RainbowText",label:"RainbowText"},
+		{href:"/Modals",label:"Modals"},
+		{href:"/Crud",label:"Crud test"},
+		{href:"/Styles",label:"Global styles"},
+		{href:"/about",label:"About"},
+		]} />
+</header>
+<main class="content">
 	<slot />
 
 </main>
 <footer class="footer">
-	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+	<h1> <RainbowText words={["Made ","With 💘"," by 😺"]} colors={["pink","violet","red"]} /></h1>
 </footer>
 
 
@@ -34,27 +35,27 @@
 		max-width: 1024px;
 		margin: 0 auto;
 		box-sizing: border-box;
-		min-height: calc(100vh - 195px);
+		min-height: 100%;
 	}
 
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-            width: 100%;
-    max-width: 100%;
-		padding: 40px;
-   		bottom:0;
+
+
+	header, footer {
+		flex-grow: 0;
+		flex-shrink: 0;
+		flex-basis: auto;
+		text-align: center;
 	}
 
-	footer a {
-		font-weight: bold;
+	main {
+		flex-grow: 1;
+		flex-shrink: 0;
+		flex-basis: auto;
 	}
 
 	@media (min-width: 480px) {
 		footer {
-			padding: 40px 0;
+			
 		}
 	}
 </style>

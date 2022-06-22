@@ -17,6 +17,6 @@
 
 <style>
 	header {
-		width: 100vw;
+		width: 100%;
 	}
 </style>
