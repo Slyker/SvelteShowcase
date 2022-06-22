@@ -6,7 +6,7 @@
 <header>
 	<Header routes={[
 		{href:"/",label:"Home"},
-		{href:"/todos",label:"Todos",disabled:true},
+		{href:"/todos",label:"Todos",disabled:false},
 		{href:"/RainbowText",label:"RainbowText"},
 		{href:"/Modals",label:"Modals"},
 		{href:"/Crud",label:"Crud test"},
@@ -38,13 +38,15 @@
 		min-height: 100%;
 	}
 
-
+	header{z-index:1000;}
+	
 
 	header, footer {
 		flex-grow: 0;
 		flex-shrink: 0;
 		flex-basis: auto;
 		text-align: center;
+		background-color: #a8b5c0;
 	}
 
 	main {
@@ -54,8 +56,6 @@
 	}
 
 	@media (min-width: 480px) {
-		footer {
-			
-		}
+		
 	}
 </style>
