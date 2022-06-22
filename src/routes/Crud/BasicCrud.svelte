@@ -32,7 +32,7 @@
 
 <center>
 
-
+<h1>Including intervals</h1>
 <h1>Normal way</h1>
 <h3>
     <RainbowText

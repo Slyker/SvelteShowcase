@@ -8,8 +8,6 @@
 	<Header routes={[
 		{href:"/",label:"Home"},
 		{href:"/todos",label:"Todos",disabled:false},
-		{href:"/RainbowText",label:"RainbowText"},
-		{href:"/Modals",label:"Modals"},
 		{href:"/Crud",label:"Crud test"},
 		{href:"/lorem",label:"Lorems"},
 		{href:"/Styles",label:"Global styles"},
@@ -37,7 +35,8 @@
 		max-width: 1024px;
 		margin: 0 auto;
 		box-sizing: border-box;
-		min-height: 100%;
+		height: 100%;
+  		min-height: 100%;
 	}
 
 	header{z-index:1000;}

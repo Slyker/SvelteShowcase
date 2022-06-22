@@ -7,6 +7,10 @@
     export let radioOptions:string[]=[];
     export let onChange:Function=()=>null;
     export let placeholder:string = "";
+    const simpleInput:string[] = ["text","number","color","date","datetime","datetime-local","email","file","month","password","reset","search","submit","tel","time","url","week"]
+    function typeAction(node:any) {
+        node.type = type;
+    }
     let id =  getID(5)
     let name = id + "-" + type   
     type rangeOption = {
@@ -31,57 +35,25 @@
 <label for={value}>
     {(DEBUG)? `DEBUG - Type : ${type} old:${value} new:${input} |`:""}
     
-    {#if type ==="text" }
-        <input type="text" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
-    {:else if type==="number"}
-        <input type="number" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
-    {:else if type==="color"}
-        <input type="color" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
+    {#if simpleInput.includes(type)}
+        <input use:typeAction {name}  {placeholder} id={id} bind:value={input} on:change={()=>changed=true}> 
     {:else if type==="checkbox"}
-        <input type="checkbox" name={name} placeholder="{placeholder}" id={id} bind:checked={input} on:change={()=>changed=true}>
-    {:else if type==="date"}
-        <input type="date" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="datetime"}
-        TODO<input type="datetime" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="datetime-local"}
-        <input type="datetime-local" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="email"}
-        <input type="email" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="file"}
-        <input type="file" bind:value={input} on:change={()=>changed=true}>
+        <input type="checkbox" {name} {placeholder} id={id} bind:checked={input} on:change={()=>changed=true}>
     {:else if type==="hidden"}
         <input type="hidden">
     {:else if type==="image"}
-        <input type="image" src={input} alt=""> MAY NOT WORK ITS OK
-    {:else if type==="month"}
-        <input type="month" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="password"}
-        <input type="password" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="image" src={input} alt="" {name} {id}>
     {:else if type==="radio"}
         {#each radioOptions as radioOption, i }
         <label for={radioOption}>
-            <input type="radio" name={name} id={id} bind:group={input} value={i} on:change={()=>changed=true}>
+            <input type="radio" {name} {id} bind:group={input} value={i} on:change={()=>changed=true}>
             {radioOption}
         </label>            
         {/each}
     {:else if type==="range"}
-        <input type="range" name={name} id={id} bind:value={input} on:change={()=>changed=true} min={rangeOptions.min} max={rangeOptions.max} step={rangeOptions.step}>
-    {:else if type==="reset"}
-        <input type="reset" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="search"}
-        <input type="search" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="submit"}
-        <input type="submit" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="tel"}
-        <input type="tel" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="time"}
-        <input type="time" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="url"}
-        <input type="url" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-    {:else if type==="week"}
-        <input type="week" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
-
+        <input type="range" {name} {id} bind:value={input} on:change={()=>changed=true} min={rangeOptions.min} max={rangeOptions.max} step={rangeOptions.step}>
     {/if}
+    
     
 </label>
 
