@@ -1,7 +1,6 @@
 <script lang="ts">
     import {onMount} from 'svelte';
     import {SerializeStyle} from '$lib/Styles/StylesParser'
-       
     export let colors:string[] = [];
     export let words:string[]= [];
     export let delay:number = 1;

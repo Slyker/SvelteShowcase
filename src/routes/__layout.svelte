@@ -2,6 +2,7 @@
 	import Header from '$lib/header/Header.svelte';
 	import '../app.css';
 	import RainbowText from '$lib/RainbowText/RainbowText.svelte';
+		// Gray 10 theme
 </script>
 <header>
 	<Header routes={[

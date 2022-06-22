@@ -6,6 +6,7 @@
     export let DEBUG:boolean=false;
     export let radioOptions:string[]=[];
     export let onChange:Function=()=>null;
+    export let placeholder:string = "";
     let id =  getID(5)
     let name = id + "-" + type   
     type rangeOption = {
@@ -31,21 +32,21 @@
     {(DEBUG)? `DEBUG - Type : ${type} old:${value} new:${input} |`:""}
     
     {#if type ==="text" }
-        <input type="text" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="text" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
     {:else if type==="number"}
-        <input type="number" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="number" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
     {:else if type==="color"}
-        <input type="color" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="color" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}> 
     {:else if type==="checkbox"}
-        <input type="checkbox" name={name} id={id} bind:checked={input} on:change={()=>changed=true}>
+        <input type="checkbox" name={name} placeholder="{placeholder}" id={id} bind:checked={input} on:change={()=>changed=true}>
     {:else if type==="date"}
-        <input type="date" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="date" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
     {:else if type==="datetime"}
-        TODO<input type="datetime" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        TODO<input type="datetime" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
     {:else if type==="datetime-local"}
-        <input type="datetime-local" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="datetime-local" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
     {:else if type==="email"}
-        <input type="email" name={name} id={id} bind:value={input} on:change={()=>changed=true}>
+        <input type="email" name={name}  placeholder="{placeholder}" id={id} bind:value={input} on:change={()=>changed=true}>
     {:else if type==="file"}
         <input type="file" bind:value={input} on:change={()=>changed=true}>
     {:else if type==="hidden"}

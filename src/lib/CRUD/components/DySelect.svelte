@@ -30,7 +30,7 @@
     import Select from 'svelte-select';
 	import Modal,{getModal} from '$lib/CRUD/components/Modal.svelte'
 
-
+    
 
     
     const selectChange = (objArray:selectArray[], e:any) => {
@@ -54,7 +54,7 @@
     export let type="text";
     let newWord:string="";
     let updateWord:string="";
-
+    $:updateWord = (selectedItem)?selectedItem?.label:""
     let updateModal=getID(5);
     let AddModal=getID(5);
     let DelModal=getID(5);
@@ -92,7 +92,8 @@
         <h1> Selected entry : {selectedItem?.label}</h1>
         <center>
             {#if selectedItem }
-                <DynInput type={type} bind:value={updateWord} on:change={upWord} />
+            
+                <DynInput type={type} placeholder={selectedItem?.label} bind:value={updateWord} on:change={upWord} />
     
             {/if}
         </center>
