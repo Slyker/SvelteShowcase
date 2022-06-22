@@ -2,7 +2,7 @@
 	"name": "my-app",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "svelte-kit dev --port 444 --host",
+		"dev": "svelte-kit dev --port 443 --host",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
@@ -37,9 +37,7 @@
 		"@fontsource/fira-mono": "^4.5.0",
 		"cookie": "^0.4.1",
 		"css": "^3.0.0",
-		"dotenv": "^16.0.1",
 		"locally-unique-id-generator": "^0.1.5",
-		"mongodb": "^4.7.0",
 		"style-to-js": "^1.1.1",
 		"style-to-object": "^0.3.0",
 		"svelte-select": "^5.0.0-beta.14",
